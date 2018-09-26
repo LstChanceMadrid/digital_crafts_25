@@ -34,7 +34,7 @@ class ListManager:
         # q exits the program
         if (selection == 'q'):
             print("Take Care!")
-
+            exit()
         # prints out an error and prompts user options again
         else:
             print("That is an invalid option.")
