@@ -7,15 +7,16 @@ class ListManager:
     def __init__(self):
         self.grocery_lists = {}
         self.grocery_items = []
-        
+        self.new_list_name = ""
 
-        print("hi")
+        print("Welcome to your grocery list manager!")
     
 
     #USER INPUT OPTIONS
     def user_options(self):
 
         # Gives a set of options for the user to choose from
+        print("You can press 'q' at anytime to quit your current stage: ")
         selection = input(" Press 1. to create a new list, Press 2. to add a new item to the current list, Press 3. to view your current lists: ")
 
 
@@ -25,7 +26,11 @@ class ListManager:
 
         # 2 adds items to the newly created list
         if (selection == '2'):
-            self.add_items_to_list(self.new_list_name)
+            if (self.new_list_name == ""):
+                print("No list to add the items to. Please create a new list.")
+                self.user_options()
+            else:
+                self.add_items_to_list(self.new_list_name)
 
         # 3 prints the lists out in {key: [value]} format
         if (selection == '3'):
@@ -44,6 +49,10 @@ class ListManager:
     def create_new_list(self):
 
         new_list_name = input("Enter the name of your new list: ")
+        if (new_list_name == 'q'):
+            print("Take Care!")
+            exit()
+
 
         self.grocery_lists[new_list_name] = []
         self.add_items_to_list(new_list_name)
@@ -57,6 +66,7 @@ class ListManager:
         if (item == "q"):
             self.grocery_lists[self.new_list_name].remove(item)
             dictionary_list = self.grocery_items
+            print(self.grocery_lists)
             self.user_options()
 
         self.add_items_to_list(self.new_list_name)
